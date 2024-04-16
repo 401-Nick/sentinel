@@ -17,7 +17,7 @@ This is a react web application and server that is powered by an instance of GPT
 1. Clone the repository
 
 ``` bash
-git clone repo_link
+git clone https://github.com/401-Nick/sentinel.git
 ```
 
 
