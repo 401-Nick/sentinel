@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# Sentinel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a react web application and server that is powered by an instance of GPT-4 equipped with indexed retrieval augmented generation (RAG) capabilities. The server is responsible for handling the API calls to GPT and the indexed retrieval of Missouri's criminal code. The react app is responsible for the user interface and interaction with the server.
 
-## Available Scripts
+## Process
 
-In the project directory, you can run:
+- I scraped Missouri's criminal code Chapters 556-600 and indexed it by section number. 
 
-### `npm start`
+- Once indexed, the sections are converted into embeddings and stored in a vector database. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- A user interacts with the bot by providing a natural language query. This query is then turned into an embedding using (OpenAI's text-embedding-3-large) and a similarity search is performed on the vector database. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- The most similar 3 sections are returned to the initial API call to GPT and injected into the initial prompt. This achieves an indexed retrieval augmented generation (RAG) interaction with high accuracy.
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository
 
-### `npm run build`
+``` bash
+git clone repo_link
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install the dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+For react app
+``` bash
+cd sentinel
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For server
+``` bash
+cd sentinel/server
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Start the server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+``` bash
+cd sentinel/server
+node server.js
+```
 
-## Learn More
+4. Start the react app in a new terminal
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+``` bash
+cd sentinel
+npm start
+```
+<br><br><br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<b>Aside from a lack of better response formatting and UI, here is a functional example of the app:</b>
+<br><br>
+![alt text](image-1.png)
